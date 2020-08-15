@@ -140,10 +140,10 @@ class Network(object):
         zs = []  # лист, хранящий все z векторы, слой за слоем
 
         for b, w in zip(self.biases[:-1], self.weights[:-1]):
-            z = np.dot(w, activation.T) + b
+            z = np.dot(w, activation) + b
             zs.append(z)
-            print('z=', z, w, activation)
-            activation = sigmoid(z)
+            print('z=', z, 'w=', w, 'a=', activation)
+            activation = 1.0 / (1.0 + np.exp(-z))  #sigmoid(z)
             activations.append(activation)
 
         z = np.dot(self.weights[-1], activation) + self.biases[-1]
